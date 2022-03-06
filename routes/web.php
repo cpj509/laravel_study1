@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 //컨트롤러 이용
-Route::get('/', [HomeController::class, 'index1']);
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/hello', function(){
     $books = [
@@ -46,4 +47,22 @@ Route::get('/contact', function(){
     return view('contact')->withbooks($books);
 });
 
-Route::get('/projects', [ProjectController::class, 'index1']);
+Route::get('/projects', [ProjectController::class, 'index']);
+
+//tasks
+Route::get('/tasks', [TaskController::class, 'index']);
+Route::get('/tasks/create', [TaskController::class, 'create']);
+Route::post('/tasks', [TaskController::class, 'store']);
+Route::get('/tasks/{task}', [TaskController::class, 'show']);
+Route::get('/tasks/{task}/edit', [TaskController::class, 'edit']);
+Route::put('/tasks/{task}', [TaskController::class, 'update']);
+Route::delete('/tasks/{task}', [TaskController::class, 'destroy']);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
